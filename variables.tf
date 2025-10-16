@@ -54,6 +54,11 @@ variable "route_table_name" {
   default     = "cmtr-mg0vmvp0-01-rt"
 }
 
+# Name of SSH key pair
+variable "ssh_key" {
+  description = "Provides custom public SSH key."
+  type        = string
+}
 
 
 
