@@ -104,3 +104,20 @@ variable "instance_type" {
   type        = string
   default     = "t2.micro"
 }
+
+# S3 bucket name
+variable "s3_bucket_name" {
+  description = "Name of the S3 bucket"
+  type        = string
+  default     = "cmtr-mg0vmvp0-bucket-1760652433"
+}
+
+# Tags for S3 bucket
+variable "s3_tags" {
+  description = "Tags for the S3 bucket"
+  type        = map(string)
+  default = {
+    Project = "cmtr-mg0vmvp0"
+  }
+}
+
