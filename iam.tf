@@ -3,13 +3,18 @@ resource "aws_iam_group" "cmtr_iam_group" {
   name = var.iam_group_name
 }
 
+# data source to reference an existing bucket
+data "aws_s3_bucket" "existing_bucket" {
+  bucket = "cmtr-mg0vmvp0-bucket-1760653519"
+}
+
 # Create a IAM policy
 resource "aws_iam_policy" "cmtr_iam_policy" {
   name        = var.iam_policy_name
   tags        = var.s3_tags
   description = "IAM policy for S3 access"
   policy = templatefile("${path.module}/policy.json", {
-    bucket_name = aws_s3_bucket.my_bucket.bucket
+    bucket_name = data.aws_s3_bucket.existing_bucket.bucket
   })
 }
 
