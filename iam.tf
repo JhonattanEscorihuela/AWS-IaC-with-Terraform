@@ -5,7 +5,7 @@ resource "aws_iam_group" "cmtr_iam_group" {
 
 # data source to reference an existing bucket
 data "aws_s3_bucket" "existing_bucket" {
-  bucket = "cmtr-mg0vmvp0-bucket-1760653519"
+  bucket = "cmtr-mg0vmvp0-bucket-1760656748"
 }
 
 # Create a IAM policy
