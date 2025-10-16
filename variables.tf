@@ -27,13 +27,6 @@ variable "availability_zones" {
 }
 
 
-# Names of public subnets
-variable "public_subnet_names" {
-  description = "Names of public subnets"
-  type        = list(string)
-  default     = ["cmtr-mg0vmvp0-01-subnet-public-a", "cmtr-mg0vmvp0-01-subnet-public-b", "cmtr-mg0vmvp0-01-subnet-public-c"]
-}
-
 # CIDRs for public subnets
 variable "public_subnet_cidrs" {
   description = "CIDR blocks for public subnets"
