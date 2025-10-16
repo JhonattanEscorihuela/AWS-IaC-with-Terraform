@@ -1,8 +1,14 @@
 # Region for AWS resources
 variable "aws_region" {
-  description = "AWS region to deploy resources"
+  description = "Región de AWS para desplegar la infraestructura."
   type        = string
-  default     = "us-east-1"
+}
+
+# Required version
+variable "required_version" {
+  description = "Required version to deploy resources"
+  type        = string
+  default     = ">=1.5.7"
 }
 
 # Name of VPC
