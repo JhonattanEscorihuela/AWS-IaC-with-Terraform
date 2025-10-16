@@ -121,3 +121,30 @@ variable "s3_tags" {
   }
 }
 
+# Name of IAM group
+variable "iam_group_name" {
+  description = "Name of the IAM group"
+  type        = string
+  default     = "cmtr-mg0vmvp0-iam-group"
+}
+
+# Name of policy
+variable "iam_policy_name" {
+  description = "Name of the IAM policy"
+  type        = string
+  default     = "cmtr-mg0vmvp0-iam-policy"
+}
+
+# Name of IAM Role
+variable "iam_role_name" {
+  description = "Name of the IAM Role"
+  type        = string
+  default     = "cmtr-mg0vmvp0-iam-role"
+}
+
+# Name of instance profile
+variable "instance_profile_name" {
+  description = "Name of the instance profile"
+  type        = string
+  default     = "cmtr-mg0vmvp0-iam-instance-profile"
+}
