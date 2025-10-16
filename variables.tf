@@ -1,0 +1,66 @@
+# Region for AWS resources
+variable "aws_region" {
+  description = "AWS region to deploy resources"
+  type        = string
+  default     = "us-east-1"
+}
+
+# Name of VPC
+variable "vpc_name" {
+  description = "Name of the VPC"
+  type        = string
+  default     = "cmtr-mg0vmvp0-01-vpc"
+}
+
+# CIDR block for the VPC
+variable "vpc_cidr" {
+  description = "CIDR block for the VPC"
+  type        = string
+  default     = "10.10.0.0/16"
+}
+
+# List of availability zones
+variable "availability_zones" {
+  description = "List of availability zones"
+  type        = list(string)
+  default     = ["a", "b", "c"]
+}
+
+
+# Names of public subnets
+variable "public_subnet_names" {
+  description = "Names of public subnets"
+  type        = list(string)
+  default     = ["cmtr-mg0vmvp0-01-subnet-public-a", "cmtr-mg0vmvp0-01-subnet-public-b", "cmtr-mg0vmvp0-01-subnet-public-c"]
+}
+
+# CIDRs for public subnets
+variable "public_subnet_cidrs" {
+  description = "CIDR blocks for public subnets"
+  type        = list(string)
+  default     = ["10.10.1.0/24", "10.10.3.0/24", "10.10.5.0/24"]
+}
+
+# Name of internet gateway
+variable "igw_name" {
+  description = "Name of the Internet Gateway"
+  type        = string
+  default     = "cmtr-mg0vmvp0-01-igw"
+}
+
+# Name of route table
+variable "route_table_name" {
+  description = "Name of the Route Table"
+  type        = string
+  default     = "cmtr-mg0vmvp0-01-rt"
+}
+
+
+
+
+
+
+
+
+
+
