@@ -60,11 +60,47 @@ variable "ssh_key" {
   type        = string
 }
 
+# Name of SSH key pair
+variable "ssh_name" {
+  description = "Name of the SSH key pair"
+  type        = string
+  default     = "cmtr-mg0vmvp0-keypair"
+}
 
+# Name of EC2 instance
+variable "instance_name" {
+  description = "Name of the EC2 instance"
+  type        = string
+  default     = "cmtr-mg0vmvp0-ec2"
+}
 
+# Tags for EC2 instance
+variable "instance_tags" {
+  description = "Tags for the EC2 instance"
+  type        = map(string)
+  default = {
+    Project = "epam-tf-lab"
+    ID      = "mg0vmvp0"
+  }
+}
 
+# Name of SG
+variable "sg_name" {
+  description = "Name of the Security Group"
+  type        = string
+  default     = "cmtr-mg0vmvp0-sg"
+}
 
+# AMI ID for the EC2 instance
+variable "ami_id" {
+  description = "AMI ID for the EC2 instance"
+  type        = string
+  default     = "ami-0023921b4fcd5382b"
+}
 
-
-
-
+# Instance type for the EC2 instance
+variable "instance_type" {
+  description = "Instance type for the EC2 instance"
+  type        = string
+  default     = "t2.micro"
+}
