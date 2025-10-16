@@ -1,0 +1,10 @@
+# Terraform
+.terraform/
+.terraform.lock.hcl
+
+# State files (importante no subirlos al repo)
+terraform.tfstate
+terraform.tfstate.backup
+
+# Crash logs
+crash.log
