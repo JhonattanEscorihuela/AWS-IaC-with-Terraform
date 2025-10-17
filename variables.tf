@@ -53,13 +53,7 @@ variable "route_table_name" {
   type        = string
   default     = "cmtr-mg0vmvp0-01-rt"
 }
-
-# Name of SSH key pair
-variable "ssh_key" {
-  description = "Provides custom public SSH key."
-  type        = string
-}
-
+# --------------------------- EC2 Instance ---------------------------
 # Name of SSH key pair
 variable "ssh_name" {
   description = "Name of the SSH key pair"
@@ -170,13 +164,4 @@ variable "security_group_name_http_private" {
   type        = string
   default     = "cmtr-mg0vmvp0-private-http-sg"
 }
-
-
-
-
-
-
-
-
-
 
