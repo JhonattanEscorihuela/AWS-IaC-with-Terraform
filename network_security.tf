@@ -19,9 +19,6 @@ resource "aws_security_group" "cmtr_sg_new" {
     cidr_blocks = var.allowed_ip_range
   }
 
-
-
-
 }
 
 # Create a Security Group for HTTP
@@ -44,7 +41,6 @@ resource "aws_security_group" "cmtr_http_sg" {
     protocol    = "icmp"
     cidr_blocks = var.allowed_ip_range
   }
-
 
 }
 
@@ -71,36 +67,35 @@ resource "aws_security_group" "cmtr_private_http_sg" {
     security_groups = [aws_security_group.cmtr_http_sg.id]
   }
 
-
 }
 
-data "aws_instance" "public_instance" {
-  instance_id = var.public_instance_id
-}
+# data "aws_instance" "public_instance" {
+#   instance_id = var.public_instance_id
+# }
 
-data "aws_instance" "private_instance" {
-  instance_id = var.private_instance_id
-}
+# data "aws_instance" "private_instance" {
+#   instance_id = var.private_instance_id
+# }
 
-resource "aws_network_interface_sg_attachment" "public_attach_ssh" {
-  security_group_id    = aws_security_group.cmtr_sg_new.id
-  network_interface_id = data.aws_instance.public_instance.network_interface_id
-}
+# resource "aws_network_interface_sg_attachment" "public_attach_ssh" {
+#   security_group_id    = aws_security_group.cmtr_sg_new.id
+#   network_interface_id = data.aws_instance.public_instance.network_interface_id
+# }
 
-resource "aws_network_interface_sg_attachment" "public_attach_http" {
-  security_group_id    = aws_security_group.cmtr_http_sg.id
-  network_interface_id = data.aws_instance.public_instance.network_interface_id
-}
+# resource "aws_network_interface_sg_attachment" "public_attach_http" {
+#   security_group_id    = aws_security_group.cmtr_http_sg.id
+#   network_interface_id = data.aws_instance.public_instance.network_interface_id
+# }
 
-resource "aws_network_interface_sg_attachment" "private_attach_ssh" {
-  security_group_id    = aws_security_group.cmtr_sg_new.id
-  network_interface_id = data.aws_instance.private_instance.network_interface_id
-}
+# resource "aws_network_interface_sg_attachment" "private_attach_ssh" {
+#   security_group_id    = aws_security_group.cmtr_sg_new.id
+#   network_interface_id = data.aws_instance.private_instance.network_interface_id
+# }
 
-resource "aws_network_interface_sg_attachment" "private_attach_private_http" {
-  security_group_id    = aws_security_group.cmtr_private_http_sg.id
-  network_interface_id = data.aws_instance.private_instance.network_interface_id
-}
+# resource "aws_network_interface_sg_attachment" "private_attach_private_http" {
+#   security_group_id    = aws_security_group.cmtr_private_http_sg.id
+#   network_interface_id = data.aws_instance.private_instance.network_interface_id
+# }
 
 
 
