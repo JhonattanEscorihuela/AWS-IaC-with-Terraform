@@ -32,8 +32,8 @@ resource "aws_security_group" "cmtr_http_sg" {
   tags        = var.s3_tags
 
   ingress {
-    from_port   = 22
-    to_port     = 22
+    from_port   = 80
+    to_port     = 80
     protocol    = "tcp"
     cidr_blocks = var.allowed_ip_range
   }
