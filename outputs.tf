@@ -31,13 +31,13 @@ output "public_subnet_availability_zone" {
 }
 
 # The unique identifier of the Internet Gateway
-output "igw_id" {
+output "internet_gateway_id" {
   description = "Internet Gateway ID"
   value       = aws_internet_gateway.igw.id
 }
 
 # The unique identifier of the routing table
-output "route_table_id" {
+output "routing_table_id" {
   description = "Route Table ID"
   value       = aws_route_table.public_rt.id
 }
