@@ -1,0 +1,107 @@
+# Create a Security Group for SSH
+resource "aws_security_group" "cmtr_sg_new" {
+  name        = var.security_group_name_ssh
+  description = "Security group for SSH and HTTP access"
+  vpc_id      = var.vpc_id
+  tags        = var.s3_tags
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = var.allowed_ip_range
+  }
+
+  ingress {
+    from_port   = -1
+    to_port     = -1
+    protocol    = "icmp"
+    cidr_blocks = var.allowed_ip_range
+  }
+
+
+
+
+}
+
+# Create a Security Group for HTTP
+resource "aws_security_group" "cmtr_http_sg" {
+  name        = var.security_group_name_http
+  description = "Security group for HTTP access"
+  vpc_id      = var.vpc_id
+  tags        = var.s3_tags
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = var.allowed_ip_range
+  }
+
+  ingress {
+    from_port   = -1
+    to_port     = -1
+    protocol    = "icmp"
+    cidr_blocks = var.allowed_ip_range
+  }
+
+
+}
+
+# Create a Security Group for Private HTTP
+resource "aws_security_group" "cmtr_private_http_sg" {
+  name        = var.security_group_name_http_private
+  description = "Security group for Private HTTP access"
+  vpc_id      = var.vpc_id
+  tags        = var.s3_tags
+
+
+  ingress {
+    from_port       = 8080
+    to_port         = 8080
+    protocol        = "tcp"
+    security_groups = [aws_security_group.cmtr_http_sg.id]
+
+  }
+
+  ingress {
+    from_port       = -1
+    to_port         = -1
+    protocol        = "icmp"
+    security_groups = [aws_security_group.cmtr_http_sg.id]
+  }
+
+
+}
+
+data "aws_instance" "public_instance" {
+  instance_id = var.public_instance_id
+}
+
+data "aws_instance" "private_instance" {
+  instance_id = var.private_instance_id
+}
+
+resource "aws_network_interface_sg_attachment" "public_attach_ssh" {
+  security_group_id    = aws_security_group.cmtr_sg_new.id
+  network_interface_id = data.aws_instance.public_instance.network_interface_id
+}
+
+resource "aws_network_interface_sg_attachment" "public_attach_http" {
+  security_group_id    = aws_security_group.cmtr_http_sg.id
+  network_interface_id = data.aws_instance.public_instance.network_interface_id
+}
+
+resource "aws_network_interface_sg_attachment" "private_attach_ssh" {
+  security_group_id    = aws_security_group.cmtr_sg_new.id
+  network_interface_id = data.aws_instance.private_instance.network_interface_id
+}
+
+resource "aws_network_interface_sg_attachment" "private_attach_private_http" {
+  security_group_id    = aws_security_group.cmtr_private_http_sg.id
+  network_interface_id = data.aws_instance.private_instance.network_interface_id
+}
+
+
+
+

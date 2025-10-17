@@ -148,3 +148,54 @@ variable "instance_profile_name" {
   type        = string
   default     = "cmtr-mg0vmvp0-iam-instance-profile"
 }
+
+# --------------------------- Security Group Rules ---------------------------
+# Name of Security group for ssh
+variable "security_group_name_ssh" {
+  description = "Name of the Security Group"
+  type        = string
+  default     = "cmtr-mg0vmvp0-ssh-sg"
+}
+
+# Name of HTTP Security group
+variable "security_group_name_http" {
+  description = "Name of the HTTP Security Group"
+  type        = string
+  default     = "cmtr-mg0vmvp0-public-http-sg"
+}
+
+# Name of Private HTTP Security Group
+variable "security_group_name_http_private" {
+  description = "Name of the Private HTTP Security Group"
+  type        = string
+  default     = "cmtr-mg0vmvp0-private-http-sg"
+}
+
+# List of IP address range for secure access
+variable "allowed_ip_range" {
+  description = "List of IP address ranges for secure access"
+  type        = list(string)
+}
+
+# VPC ID for security group
+variable "vpc_id" {
+  description = "VPC ID for the security group"
+  type        = string
+}
+
+# ID of a public instance existing
+variable "public_instance_id" {
+  description = "ID of a existing instance"
+  type        = string
+}
+
+# Id of a private instance existing
+variable "private_instance_id" {
+  description = "ID of a existing instance"
+  type        = string
+}
+
+
+
+
+
