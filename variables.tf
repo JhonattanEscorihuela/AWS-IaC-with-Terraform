@@ -27,21 +27,78 @@ variable "common_tags" {
   }
 }
 
-# S3 bucket name for remote state
-variable "state_bucket" {
-  description = "S3 bucket name for remote state"
+# Name of AWS launch template
+variable "launch_template_name" {
+  description = "Name of the AWS launch template"
+  type        = string
+  default     = "cmtr-mg0vmvp0-template"
+}
+
+# Type of EC2 instance
+variable "instance_type" {
+  description = "Type of EC2 instance to deploy"
+  type        = string
+  default     = "t3.micro"
+}
+
+variable "ssh_key_name" {
+  description = "Existing SSH key pair name"
+  type        = string
+  default     = "cmtr-mg0vmvp0-keypair"
+}
+
+variable "instance_profile_name" {
+  description = "Name of the IAM Instance Profile"
+  type        = string
+  default     = "cmtr-mg0vmvp0-instance_profile"
+}
+
+variable "ec2_sg_id" {
+  description = "EC2 security group ID"
   type        = string
 }
 
-# S3 key path for remote state file
-variable "state_key" {
-  description = "S3 key path for remote state file"
+variable "http_sg_id" {
+  description = "HTTP security group ID"
   type        = string
 }
 
-# Name of VPC
-variable "vpc_name" {
-  description = "Name of the VPC"
+# Name Auto Scaling Group
+variable "asg_name" {
+  description = "Name of the Auto Scaling Group"
   type        = string
-  default     = "cmtr-mg0vmvp0-01-vpc"
+  default     = "cmtr-mg0vmvp0-asg"
+}
+
+variable "public_subnet_a_id" {
+  description = "ID of public subnet A"
+  type        = string
+}
+
+variable "public_subnet_b_id" {
+  description = "ID of public subnet B"
+  type        = string
+}
+
+variable "ami_id" {
+  description = "AMI ID to use for instances"
+  type        = string
+  default     = "ami-09e6f87a47903347c"
+}
+
+# Name of Application Load Balancer
+variable "lb_name" {
+  description = "Name of the Load Balancer"
+  type        = string
+  default     = "cmtr-mg0vmvp0-loadbalancer"
+}
+
+variable "cmtr-mg0vmvp0-sglb" {
+  description = "Security group for Load Balancer"
+  type        = string
+}
+
+variable "vpc_id" {
+  description = "VPC ID where resources will be deployed"
+  type        = string
 }
