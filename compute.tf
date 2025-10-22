@@ -2,6 +2,13 @@ resource "aws_launch_template" "green_lt" {
   name_prefix   = var.name_launch_template_green
   image_id      = var.ami_id
   instance_type = var.instance_type
+
+  vpc_security_group_ids = [
+    data.aws_security_group.http.id,
+    data.aws_security_group.ssh.id
+  ]
+
+
   tag_specifications {
     resource_type = "instance"
 
@@ -23,6 +30,12 @@ resource "aws_launch_template" "blue_lt" {
   name_prefix   = var.name_launch_template_blue
   image_id      = var.ami_id
   instance_type = var.instance_type
+
+  vpc_security_group_ids = [
+    data.aws_security_group.http.id,
+    data.aws_security_group.ssh.id
+  ]
+
   tag_specifications {
     resource_type = "instance"
 
