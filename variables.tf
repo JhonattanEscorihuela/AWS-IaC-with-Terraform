@@ -11,11 +11,6 @@ variable "required_version" {
   default     = ">=1.5.7"
 }
 
-# Project identifier for tagging
-variable "project_id" {
-  description = "Project identifier for tagging"
-  type        = string
-}
 
 # Tags for EC2 instances
 variable "common_tags" {
@@ -27,34 +22,40 @@ variable "common_tags" {
   }
 }
 
-variable "vpc_id" {
+variable "vpc_name" {
   description = "ID of the VPC"
   type        = string
+  default     = "cmtr-mg0vmvp0-vpc"
 }
 
-variable "public_subnet_1_id" {
-  description = "ID of the first public subnet"
+variable "public_subnet_1" {
+  description = "Name of the first public subnet"
   type        = string
+  default     = "cmtr-mg0vmvp0-public-subnet1"
 }
 
-variable "public_subnet_2_id" {
+variable "public_subnet_2" {
   description = "ID of the second public subnet"
   type        = string
+  default     = "cmtr-mg0vmvp0-public-subnet2"
 }
 
 variable "security_group_ssh_name" {
   description = "Name of the SSH security group"
   type        = string
+  default     = "cmtr-mg0vmvp0-sg-ssh"
 }
 
 variable "security_group_http_name" {
   description = "Name of the HTTP security group"
   type        = string
+  default     = "cmtr-mg0vmvp0-sg-http"
 }
 
-variable "security_group_lb_id" {
+variable "security_group_lb_name" {
   description = "Name of the Load Balancer security group"
   type        = string
+  default     = "cmtr-mg0vmvp0-sg-lb"
 }
 
 variable "blue_weight" {

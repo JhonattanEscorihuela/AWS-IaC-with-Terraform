@@ -44,7 +44,7 @@ resource "aws_lb_target_group" "green_tg" {
   name     = var.name_target_group_green
   port     = 80
   protocol = "HTTP"
-  vpc_id   = var.vpc_id
+  vpc_id   = data.aws_vpc.selected.id
   health_check {
     path                = "/"
     protocol            = "HTTP"
@@ -64,7 +64,7 @@ resource "aws_lb_target_group" "blue_tg" {
   name     = var.name_target_group_blue
   port     = 80
   protocol = "HTTP"
-  vpc_id   = var.vpc_id
+  vpc_id   = data.aws_vpc.selected.id
   health_check {
     path                = "/"
     protocol            = "HTTP"
@@ -84,12 +84,12 @@ resource "aws_autoscaling_group" "green_asg" {
   name             = var.name_asg_green
   max_size         = 2
   min_size         = 1
-  desired_capacity = 1
+  desired_capacity = 2
   launch_template {
     id      = aws_launch_template.green_lt.id
     version = "$Latest"
   }
-  vpc_zone_identifier       = [var.public_subnet_1_id, var.public_subnet_2_id]
+  vpc_zone_identifier       = [data.aws_subnet.public_subnet_1.id, data.aws_subnet.public_subnet_2.id]
   target_group_arns         = [aws_lb_target_group.green_tg.arn]
   health_check_type         = "ELB"
   health_check_grace_period = 300
@@ -108,12 +108,12 @@ resource "aws_autoscaling_group" "blue_asg" {
   name             = var.name_asg_blue
   max_size         = 2
   min_size         = 1
-  desired_capacity = 1
+  desired_capacity = 2
   launch_template {
     id      = aws_launch_template.blue_lt.id
     version = "$Latest"
   }
-  vpc_zone_identifier       = [var.public_subnet_1_id, var.public_subnet_2_id]
+  vpc_zone_identifier       = [data.aws_subnet.public_subnet_1.id, data.aws_subnet.public_subnet_2.id]
   target_group_arns         = [aws_lb_target_group.blue_tg.arn]
   health_check_type         = "ELB"
   health_check_grace_period = 300
@@ -135,8 +135,8 @@ resource "aws_lb" "alb" {
   name               = var.name_load_balancer
   internal           = false
   load_balancer_type = "application"
-  security_groups    = [var.security_group_lb_id]
-  subnets            = [var.public_subnet_1_id, var.public_subnet_2_id]
+  security_groups    = [data.aws_security_group.lb.id]
+  subnets            = [data.aws_subnet.public_subnet_1.id, data.aws_subnet.public_subnet_2.id]
 
   enable_deletion_protection = false
 
