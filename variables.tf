@@ -59,13 +59,13 @@ variable "security_group_lb_name" {
 }
 
 variable "blue_weight" {
-  description = "The traffic weight for the Blue Target Group. Specifies the percentage of traffic routed to the Blue environment."
+  description = "The traffic weight for the Blue Target Group"
   type        = number
   default     = 100
 }
 
 variable "green_weight" {
-  description = "The traffic weight for the Green Target Group. Specifies the percentage of traffic routed to the Green environment."
+  description = "The traffic weight for the Green Target Group"
   type        = number
   default     = 0
 }
