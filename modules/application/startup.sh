@@ -1,24 +1,23 @@
 #!/bin/bash
-# 1️⃣ Update system packages / Actualizar paquetes
 yum update -y
-
-# 2️⃣ Install utilities / Instalar utilidades
 yum install -y httpd jq aws-cli
 
-# 3️⃣ Enable & start web server / Habilitar y arrancar servidor web
+# Espera unos segundos para que la red esté lista
+sleep 10
+
 systemctl enable httpd
 systemctl start httpd
 
-# 4️⃣ Get metadata using IMDSv2 / Obtener metadatos seguros
+# Obtener metadatos seguros (IMDSv2)
 TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" \
   -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
 
 COMPUTE_INSTANCE_ID=$(curl -H "X-aws-ec2-metadata-token: $TOKEN" \
   http://169.254.169.254/latest/meta-data/instance-id)
 
-COMPUTE_MACHINE_UUID=$(cat /sys/devices/virtual/dmi/id/product_uuid |tr '[:upper:]' '[:lower:]')
+COMPUTE_MACHINE_UUID=$(cat /sys/devices/virtual/dmi/id/product_uuid | tr '[:upper:]' '[:lower:]')
 
-# 5️⃣ Create custom HTML page / Crear página HTML personalizada
+# Crear página HTML personalizada
 cat <<EOF > /var/www/html/index.html
 <html>
   <head><title>My Instance Info</title></head>
@@ -28,3 +27,6 @@ cat <<EOF > /var/www/html/index.html
   </body>
 </html>
 EOF
+
+# Reinicia httpd para asegurar que sirva el nuevo index.html
+systemctl restart httpd
