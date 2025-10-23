@@ -11,15 +11,6 @@ resource "aws_security_group" "cmtr_sg_ssh" {
     cidr_blocks = var.allowed_ip_range
   }
 
-  ingress {
-    from_port   = -1
-    to_port     = -1
-    protocol    = "icmp"
-    cidr_blocks = var.allowed_ip_range
-  }
-
-
-
 
 }
 
@@ -36,14 +27,6 @@ resource "aws_security_group" "cmtr_http_sg" {
     protocol    = "tcp"
     cidr_blocks = var.allowed_ip_range
   }
-
-  ingress {
-    from_port   = -1
-    to_port     = -1
-    protocol    = "icmp"
-    cidr_blocks = var.allowed_ip_range
-  }
-
 
 }
 
@@ -62,14 +45,6 @@ resource "aws_security_group" "cmtr_private_http_sg" {
     security_groups = [aws_security_group.cmtr_http_sg.id]
 
   }
-
-  ingress {
-    from_port       = -1
-    to_port         = -1
-    protocol        = "icmp"
-    security_groups = [aws_security_group.cmtr_http_sg.id]
-  }
-
 
 }
 
