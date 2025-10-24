@@ -30,7 +30,6 @@ resource "aws_autoscaling_group" "cmtr_mg0vmvp0_asg" {
     propagate_at_launch = true
   }
 
-  target_group_arns         = [aws_lb.cmtr_mg0vmvp0_alb.arn]
   health_check_type         = "ELB"
   health_check_grace_period = 300
   termination_policies      = ["OldestInstance", "OldestLaunchConfiguration"]
