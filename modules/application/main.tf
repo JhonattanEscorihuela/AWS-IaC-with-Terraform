@@ -30,6 +30,10 @@ resource "aws_autoscaling_group" "cmtr_mg0vmvp0_asg" {
     propagate_at_launch = true
   }
 
+  target_group_arns         = [aws_lb.cmtr_mg0vmvp0_alb.arn]
+  health_check_type         = "ELB"
+  health_check_grace_period = 300
+  termination_policies      = ["OldestInstance", "OldestLaunchConfiguration"]
 
 
   lifecycle {
@@ -79,7 +83,4 @@ resource "aws_lb_listener" "cmtr_mg0vmvp0_listener" {
   }
 }
 
-resource "aws_autoscaling_attachment" "cmtr_mg0vmvp0_asg_attachment" {
-  autoscaling_group_name = aws_autoscaling_group.cmtr_mg0vmvp0_asg.name
-  lb_target_group_arn    = aws_lb_target_group.cmtr_mg0vmvp0_tg.arn
-}
+
